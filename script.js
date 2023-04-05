@@ -1,4 +1,4 @@
-let place = 'London';
+let place = 'Cape Town';
 let units = true;
 let tempUnit, precipUnit, windUnit, tempValue, precipValue, windValue;
 
@@ -49,6 +49,7 @@ async function displayInfo () {
     current.textContent = 'Current condition: ' + object.condition.text;
 
     const currentImg = document.createElement('img');
+    currentImg.classList.add('image');
     currentImg.src = object.condition.icon;
 
     const temp = document.createElement('div');
@@ -67,9 +68,9 @@ async function displayInfo () {
     wind.classList.add('info');
     wind.textContent = 'Wind: ' + windValue + windUnit + ' Direction: ' + object.wind_dir;
 
+    displayInfo.appendChild(currentImg);
     displayInfo.appendChild(newPlace);
     displayInfo.appendChild(current);
-    displayInfo.appendChild(currentImg);
     displayInfo.appendChild(temp);
     displayInfo.appendChild(humid);
     displayInfo.appendChild(rain);
