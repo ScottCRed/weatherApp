@@ -77,6 +77,35 @@ async function displayInfo () {
     displayInfo.appendChild(wind)
     console.log(fetchData)
  }
+ 
+async function getForecast() {
+    try {
+const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=3ca24ea75ac143c4945115016230404&q=${place}&days=7`, {mode:"cors"});
+const forecastData = await response.json();
+
+console.log(forecastData);
+return forecastData;
+    }
+    catch (error) {
+        consolee.log('error');
+    }
+
+}
+
+async function displayForecast () {
+    let fetchData = await getForecast();
+
+     for (let i=0; i < 7; i++) {
+        let object = fetchData.forecast.forecastday[i];
+        let date = object.date;
+        let maxTemp = object.day.maxtemp_c;
+        let minTemp = object.day.mintemp_c;
+        let precip = object.day.totalprecip_mm;
+        console.log(date, maxTemp, minTemp, precip);
+
+        
+     }
+}
 
  async function unitDisplay () {
     const fetchData =  await getWeather();
@@ -113,4 +142,6 @@ async function displayInfo () {
  }
 
 getWeather();
+getForecast();
 displayInfo();
+displayForecast();
