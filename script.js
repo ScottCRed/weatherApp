@@ -97,13 +97,27 @@ async function displayForecast () {
 
      for (let i=0; i < 7; i++) {
         let object = fetchData.forecast.forecastday[i];
-        let date = object.date;
-        let maxTemp = object.day.maxtemp_c;
-        let minTemp = object.day.mintemp_c;
-        let precip = object.day.totalprecip_mm;
-        console.log(date, maxTemp, minTemp, precip);
 
-        
+        const container = document.querySelector('.forecast');
+        const box = document.createElement('div');
+        box.classList.add('forecastBox');
+        const foreImg = document.createElement('img')
+        foreImg.src = object.day.condition.icon;
+        const dateLine = document.createElement('p');
+        dateLine.textContent = object.date;
+        const maxLine = document.createElement('p');
+        maxLine.textContent = 'Max: ' + object.day.maxtemp_c + tempUnit;
+        const minLine = document.createElement('p');
+        minLine.textContent = 'Min: ' + object.day.mintemp_c + tempUnit;
+        const precipLine = document.createElement('p');
+        precipLine.textContent = 'Rain: ' + object.day.mintemp_c + precipUnit;
+
+        container.appendChild(box);
+        box.appendChild(foreImg);
+        box.appendChild(dateLine);
+        box.appendChild(minLine);
+        box.appendChild(maxLine);
+        box.appendChild(precipLine);
      }
 }
 
