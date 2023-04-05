@@ -90,3 +90,14 @@ button:hover {
 p {
     margin: 2px;
 }
+
+.footer {
+    display: flex;
+    height: 10vh;
+    font-size: 20px;
+    justify-content: center;
+    align-items: end;
+    color: #151617;
+    margin-bottom: 0;
+    margin-top: 50px;
+}
