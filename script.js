@@ -18,7 +18,7 @@ async function getWeather() {
     try {
 const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=3ca24ea75ac143c4945115016230404&q=${place}`, {mode:"cors"});
 const weatherData = await response.json();
-console.log(weatherData)
+
 return weatherData;
     }
     catch (error) {
@@ -27,24 +27,26 @@ return weatherData;
 
 }
 
-function displayInfo () {
-    
+async function displayInfo () {
+    const fetchData =  await getWeather();
+
     const displayInfo = document.querySelector('.infoDisplay');
+    displayInfo.innerHTML = '';
     const newPlace = document.createElement('div');
     newPlace.classList.add('info');
     newPlace.textContent = 'Location:' 
 
      const temp = document.createElement('div');
      temp.classList.add('info');
-     temp.textContent = 'Current Temperature: ' + weatherData.current.temp_c + ' Celcius.';
+     temp.textContent = 'Current Temperature: ' + fetchData.current.temp_c + ' Celcius.';
 
      const humid = document.createElement('div');
      humid.classList.add('info');
-     humid.textContent = 'Current humidity: ' + weatherData.current.humidity + '%';
+     humid.textContent = 'Current humidity: ' + fetchData.current.humidity + '%';
 
      const rain = document.createElement('div');
      rain.classList.add('info');
-     rain.textContent = 'Predicted precipitation: ' + weatherData.current.precip_mm + 'mm';
+     rain.textContent = 'Predicted precipitation: ' + fetchData.current.precip_mm + 'mm';
 
     displayInfo.appendChild(newPlace);
      displayInfo.appendChild(temp);
@@ -53,3 +55,4 @@ function displayInfo () {
  }
 
 getWeather();
+displayInfo();
