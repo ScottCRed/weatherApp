@@ -29,29 +29,46 @@ return weatherData;
 
 async function displayInfo () {
     const fetchData =  await getWeather();
+    let object  = fetchData.current;
 
     const displayInfo = document.querySelector('.infoDisplay');
     displayInfo.innerHTML = '';
+
     const newPlace = document.createElement('div');
     newPlace.classList.add('info');
-    newPlace.textContent = 'Location:' 
+    newPlace.textContent = 'Current Location: ' + fetchData.location.name + ', ' + fetchData.location.country 
 
-     const temp = document.createElement('div');
-     temp.classList.add('info');
-     temp.textContent = 'Current Temperature: ' + fetchData.current.temp_c + ' Celcius.';
+    const current = document.createElement('div');
+    current.classList.add('info');
+    current.textContent = 'Current condition: ' + object.condition.text;
 
-     const humid = document.createElement('div');
-     humid.classList.add('info');
-     humid.textContent = 'Current humidity: ' + fetchData.current.humidity + '%';
+    const currentImg = document.createElement('img');
+    currentImg.src = object.condition.icon;
 
-     const rain = document.createElement('div');
-     rain.classList.add('info');
-     rain.textContent = 'Predicted precipitation: ' + fetchData.current.precip_mm + 'mm';
+    const temp = document.createElement('div');
+    temp.classList.add('info');
+    temp.textContent = 'Current Temperature: ' + object.temp_c + '℃';
+
+    const humid = document.createElement('div');
+    humid.classList.add('info');
+    humid.textContent = 'Current humidity: ' + object.humidity + '%';
+
+    const rain = document.createElement('div');
+    rain.classList.add('info');
+    rain.textContent = 'Predicted precipitation: ' + object.precip_mm + 'mm';
+
+    const wind = document.createElement('div');
+    wind.classList.add('info');
+    wind.textContent = 'Wind: ' + object.wind_kph + 'Km/h Direction: ' + object.wind_dir
 
     displayInfo.appendChild(newPlace);
-     displayInfo.appendChild(temp);
-     displayInfo.appendChild(humid);
-     displayInfo.appendChild(rain);
+    displayInfo.appendChild(current);
+    displayInfo.appendChild(currentImg);
+    displayInfo.appendChild(temp);
+    displayInfo.appendChild(humid);
+    displayInfo.appendChild(rain);
+    displayInfo.appendChild(wind)
+    console.log(fetchData)
  }
 
 getWeather();
