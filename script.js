@@ -1,6 +1,6 @@
 let place = 'Cape Town';
 let units = true;
-let tempUnit, precipUnit, windUnit, tempValue, precipValue, windValue;
+let tempUnit, precipUnit, windUnit, tempValue, precipValue, windValue, maxValue, minValue, preCastValue;
 
 const newLocation = document.querySelector('.submit-button');
 newLocation.addEventListener('click', changeLocation);
@@ -77,7 +77,6 @@ async function displayInfo () {
     displayInfo.appendChild(humid);
     displayInfo.appendChild(rain);
     displayInfo.appendChild(wind)
-    console.log(fetchData)
  }
  
 async function getForecast() {
@@ -85,7 +84,6 @@ async function getForecast() {
 const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=3ca24ea75ac143c4945115016230404&q=${place}&days=7`, {mode:"cors"});
 const forecastData = await response.json();
 
-console.log(forecastData);
 return forecastData;
     }
     catch (error) {
@@ -102,7 +100,7 @@ async function displayForecast () {
     
      for (let i=0; i < 7; i++) {
         let object = fetchData.forecast.forecastday[i];
-        await unitDisplay();
+        await forecastUnit(i);
         const container = document.querySelector('.forecast');
         const box = document.createElement('div');
         box.classList.add('forecastBox');
@@ -111,11 +109,11 @@ async function displayForecast () {
         const dateLine = document.createElement('p');
         dateLine.textContent = object.date;
         const maxLine = document.createElement('p');
-        maxLine.textContent = 'Max: ' + object.day.maxtemp_c + tempUnit;
+        maxLine.textContent = 'Max: ' + maxValue + tempUnit;
         const minLine = document.createElement('p');
-        minLine.textContent = 'Min: ' + object.day.mintemp_c + tempUnit;
+        minLine.textContent = 'Min: ' + minValue + tempUnit;
         const precipLine = document.createElement('p');
-        precipLine.textContent = 'Rain: ' + object.day.mintemp_c + precipUnit;
+        precipLine.textContent = 'Rain: ' + preCastValue + precipUnit;
 
         container.appendChild(box);
         box.appendChild(foreImg);
@@ -126,7 +124,7 @@ async function displayForecast () {
      }
 }
 
- async function unitDisplay () {
+async function unitDisplay () {
     const fetchData =  await getWeather();
     let object  = fetchData.current;
     if (units === true) {
@@ -146,7 +144,26 @@ async function displayForecast () {
         windUnit = 'm/h';
     }
  }
-
+ async function forecastUnit (i) {
+    const fetchForecast = await getForecast();
+    let castObject = fetchForecast.forecast.forecastday[i];
+    if (units === true) {
+        maxValue = castObject.day.maxtemp_c;
+        minValue = castObject.day.mintemp_c;
+        preCastValue = castObject.day.totalprecip_mm
+        tempUnit = '°C';
+        precipUnit = 'mm';
+        windUnit = 'km/h';
+    }
+    else if (units === false) {
+        maxValue = castObject.day.maxtemp_f;
+        minValue = castObject.day.mintemp_f;
+        preCastValue = castObject.day.totalprecip_in
+        tempUnit = '°F';
+        precipUnit = 'in';
+        windUnit = 'm/h';
+    }
+ }
  async function changeUnits() {
 
     if (units === true) {
