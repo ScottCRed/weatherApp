@@ -6,6 +6,7 @@ const newLocation = document.querySelector('.submit-button');
 newLocation.addEventListener('click', changeLocation);
 const render = document.querySelector('.submit-button');
 render.addEventListener('click', displayInfo);
+render.addEventListener('click', displayForecast);
 const change = document.querySelector('.change');
 change.addEventListener('click', changeUnits);
 
@@ -15,6 +16,7 @@ function changeLocation () {
     const searchKey = document.querySelector('form');
     place = searchKey.location.value;
     getWeather();
+    getForecast();
     searchKey.reset();
 }
 
@@ -93,6 +95,9 @@ return forecastData;
 }
 
 async function displayForecast () {
+    const display= document.querySelector('.forecast');
+    display.innerHTML = '';
+
     let fetchData = await getForecast();
     await unitDisplay();
      for (let i=0; i < 7; i++) {
