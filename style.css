@@ -5,6 +5,7 @@ body{
 }
 
 .infoDisplay {
+    font-size: large;
     background-color: white;
     border-radius: 24px;
     border-style: solid 1px;
@@ -12,7 +13,7 @@ body{
     box-sizing: border-box;
     padding: 15px;
     padding-top: 0;
-    width: 25%;
+    width: 20%;
     text-align: left;
     margin: 5px;
 }
@@ -21,10 +22,13 @@ body{
     padding: 0;
     height: 100px;
     width: 100px;
+
+}
+
+img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-
 }
 
 button, input {
@@ -63,4 +67,26 @@ button:hover {
    flex-direction: column;
    justify-content: center;
    align-items: center;
+}
+
+.forecast {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.forecastBox {
+    margin: 20px;
+    margin-top: 100px;
+    padding: 5px;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    border-radius: 24px;
+    border-style: none;
+    height: 10%;
+    width: 10%;
+}
+
+p {
+    margin: 2px;
 }
