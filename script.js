@@ -1,9 +1,14 @@
 let place = 'London';
+let units = true;
+let tempUnit, precipUnit, windUnit, tempValue, precipValue, windValue;
 
 const newLocation = document.querySelector('.submit-button');
 newLocation.addEventListener('click', changeLocation);
 const render = document.querySelector('.submit-button');
 render.addEventListener('click', displayInfo);
+const change = document.querySelector('.change');
+change.addEventListener('click', changeUnits);
+
 
 function changeLocation () {
     event.preventDefault();
@@ -28,8 +33,10 @@ return weatherData;
 }
 
 async function displayInfo () {
+    
     const fetchData =  await getWeather();
     let object  = fetchData.current;
+    await unitDisplay();
 
     const displayInfo = document.querySelector('.infoDisplay');
     displayInfo.innerHTML = '';
@@ -47,7 +54,7 @@ async function displayInfo () {
 
     const temp = document.createElement('div');
     temp.classList.add('info');
-    temp.textContent = 'Current Temperature: ' + object.temp_c + '℃';
+    temp.textContent = 'Current Temperature: ' + tempValue + tempUnit;
 
     const humid = document.createElement('div');
     humid.classList.add('info');
@@ -55,11 +62,11 @@ async function displayInfo () {
 
     const rain = document.createElement('div');
     rain.classList.add('info');
-    rain.textContent = 'Predicted precipitation: ' + object.precip_mm + 'mm';
+    rain.textContent = 'Predicted precipitation: ' + precipValue + precipUnit;
 
     const wind = document.createElement('div');
     wind.classList.add('info');
-    wind.textContent = 'Wind: ' + object.wind_kph + 'Km/h Direction: ' + object.wind_dir
+    wind.textContent = 'Wind: ' + windValue + windUnit + ' Direction: ' + object.wind_dir;
 
     displayInfo.appendChild(newPlace);
     displayInfo.appendChild(current);
@@ -69,6 +76,41 @@ async function displayInfo () {
     displayInfo.appendChild(rain);
     displayInfo.appendChild(wind)
     console.log(fetchData)
+ }
+
+ async function unitDisplay () {
+    const fetchData =  await getWeather();
+    let object  = fetchData.current;
+    if (units === true) {
+        tempValue = object.temp_c;
+        precipValue = object.precip_mm; 
+        windValue = object.wind_kph;
+        tempUnit = '°C';
+        precipUnit = 'mm';
+        windUnit = 'km/h';
+    }
+    else if (units === false) {
+        tempValue = object.temp_f;
+        precipValue = object.precip_in; 
+        windValue = object.wind_mph;
+        tempUnit = '°F';
+        precipUnit = 'in';
+        windUnit = 'm/h';
+    }
+ }
+
+ async function changeUnits() {
+
+    if (units === true) {
+        units = false;
+        await displayInfo();
+    }
+    else {
+        units = true;
+        await displayInfo();
+    }
+  
+    console.log(units);
  }
 
 getWeather();
