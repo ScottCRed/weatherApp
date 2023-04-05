@@ -94,7 +94,7 @@ return forecastData;
 
 async function displayForecast () {
     let fetchData = await getForecast();
-
+    await unitDisplay();
      for (let i=0; i < 7; i++) {
         let object = fetchData.forecast.forecastday[i];
 
