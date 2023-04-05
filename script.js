@@ -14,7 +14,6 @@ function changeLocation () {
     event.preventDefault();
     const searchKey = document.querySelector('form');
     place = searchKey.location.value;
-    console.log(place);
     getWeather();
     searchKey.reset();
 }
@@ -110,7 +109,6 @@ async function displayInfo () {
         await displayInfo();
     }
   
-    console.log(units);
  }
 
 getWeather();
