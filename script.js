@@ -43,41 +43,61 @@ async function displayInfo () {
     displayInfo.innerHTML = '';
 
     const newPlace = document.createElement('div');
-    newPlace.classList.add('info');
-    newPlace.textContent = 'Current Location: ' + fetchData.location.name + ', ' + fetchData.location.country 
+    newPlace.classList.add('location');
+    newPlace.textContent = fetchData.location.name + ', ' + fetchData.location.country 
 
-    const current = document.createElement('div');
-    current.classList.add('info');
-    current.textContent = 'Current condition: ' + object.condition.text;
+    const currentInfo = document.createElement('div');
+    currentInfo.classList.add('info');
+    currentInfo.textContent = 'Current Condition: ';
+    const current = document.createElement('p');
+    current.classList.add('value');
+    current.textContent=  object.condition.text;
 
     const currentImg = document.createElement('img');
     currentImg.classList.add('image');
     currentImg.src = object.condition.icon;
 
-    const temp = document.createElement('div');
-    temp.classList.add('info');
-    temp.textContent = 'Current Temperature: ' + tempValue + tempUnit;
+    const tempInfo = document.createElement('div');
+    tempInfo.classList.add('info');
+    tempInfo.textContent = 'Current Temperature: '; 
+    const temp = document.createElement('p');
+    temp.classList.add('value');
+    temp.textContent = + tempValue + tempUnit;
 
-    const humid = document.createElement('div');
-    humid.classList.add('info');
-    humid.textContent = 'Current humidity: ' + object.humidity + '%';
+    const humidInfo = document.createElement('div');
+    humidInfo.classList.add('info');
+    humidInfo.textContent = 'Current Humidity: ';
+    const humid = document.createElement('p');
+    humid.classList.add('value');
+    humid.textContent = object.humidity + '%';
 
-    const rain = document.createElement('div');
-    rain.classList.add('info');
-    rain.textContent = 'Predicted precipitation: ' + precipValue + precipUnit;
+    const rainInfo = document.createElement('div');
+    rainInfo.classList.add('info');
+    rainInfo.textContent = 'Predicted Precipitation: ';
+    const rain = document.createElement('p');
+    rain.classList.add('value');
+    rain.textContent = precipValue + precipUnit;
 
-    const wind = document.createElement('div');
-    wind.classList.add('info');
-    wind.textContent = 'Wind: ' + windValue + windUnit + ' Direction: ' + object.wind_dir;
+    const windInfo = document.createElement('div');
+    windInfo.classList.add('info');
+    windInfo.textContent = 'Wind: ';
+    const wind = document.createElement('p');
+    wind.classList.add('value');
+    wind.textContent=  windValue + windUnit + ' ' + object.wind_dir;
 
     displayInfo.appendChild(currentImg);
     displayInfo.appendChild(newPlace);
-    displayInfo.appendChild(current);
-    displayInfo.appendChild(temp);
-    displayInfo.appendChild(humid);
-    displayInfo.appendChild(rain);
-    displayInfo.appendChild(wind)
- }
+    displayInfo.appendChild(currentInfo);
+    currentInfo.appendChild(current);
+    displayInfo.appendChild(tempInfo);
+    tempInfo.appendChild(temp);
+    displayInfo.appendChild(humidInfo);
+    humidInfo.appendChild(humid);
+    displayInfo.appendChild(rainInfo);
+    rainInfo.appendChild(rain);
+    displayInfo.appendChild(windInfo);
+    windInfo.appendChild(wind);
+}
  
 async function getForecast() {
     try {
@@ -104,23 +124,44 @@ async function displayForecast () {
         const container = document.querySelector('.forecast');
         const box = document.createElement('div');
         box.classList.add('forecastBox');
-        const foreImg = document.createElement('img')
+
+        const foreImg = document.createElement('img');
         foreImg.src = object.day.condition.icon;
+
         const dateLine = document.createElement('p');
+        dateLine.classList.add('date');
         dateLine.textContent = object.date;
+
+        const maxLineInfo = document.createElement('div');
+        maxLineInfo.classList.add('info');
+        maxLineInfo.textContent = 'Max: ';
         const maxLine = document.createElement('p');
-        maxLine.textContent = 'Max: ' + maxValue + tempUnit;
+        maxLine.classList.add('smallValue');
+        maxLine.textContent =  maxValue + tempUnit;
+
+        const minLineInfo = document.createElement('div');
+        minLineInfo.classList.add('info');
+        minLineInfo.textContent = 'Min: ';
         const minLine = document.createElement('p');
-        minLine.textContent = 'Min: ' + minValue + tempUnit;
+        minLine.classList.add('smallValue')
+        minLine.textContent = minValue + tempUnit;
+
+        const precipLineInfo = document.createElement('div');
+        precipLineInfo.classList.add('info');
+        precipLineInfo.textContent = 'Rain: '; 
         const precipLine = document.createElement('p');
-        precipLine.textContent = 'Rain: ' + preCastValue + precipUnit;
+        precipLine.classList.add('smallValue');
+        precipLine.textContent =  preCastValue + precipUnit;
 
         container.appendChild(box);
         box.appendChild(foreImg);
         box.appendChild(dateLine);
-        box.appendChild(minLine);
-        box.appendChild(maxLine);
-        box.appendChild(precipLine);
+        box.appendChild(minLineInfo);
+        minLineInfo.appendChild(minLine);
+        box.appendChild(maxLineInfo);
+        maxLineInfo.appendChild(maxLine);
+        box.appendChild(precipLineInfo);
+        precipLineInfo.appendChild(precipLine);
      }
 }
 
