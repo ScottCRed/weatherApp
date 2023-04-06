@@ -48,7 +48,7 @@ async function displayInfo () {
 
     const currentInfo = document.createElement('div');
     currentInfo.classList.add('info');
-    currentInfo.textContent = 'Current Condition: ';
+    currentInfo.textContent = 'Current Condition';
     const current = document.createElement('p');
     current.classList.add('value');
     current.textContent=  object.condition.text;
@@ -59,28 +59,28 @@ async function displayInfo () {
 
     const tempInfo = document.createElement('div');
     tempInfo.classList.add('info');
-    tempInfo.textContent = 'Current Temperature: '; 
+    tempInfo.textContent = 'Current Temperature'; 
     const temp = document.createElement('p');
     temp.classList.add('value');
     temp.textContent = + tempValue + tempUnit;
 
     const humidInfo = document.createElement('div');
     humidInfo.classList.add('info');
-    humidInfo.textContent = 'Current Humidity: ';
+    humidInfo.textContent = 'Current Humidity';
     const humid = document.createElement('p');
     humid.classList.add('value');
     humid.textContent = object.humidity + '%';
 
     const rainInfo = document.createElement('div');
     rainInfo.classList.add('info');
-    rainInfo.textContent = 'Predicted Precipitation: ';
+    rainInfo.textContent = 'Predicted Precipitation';
     const rain = document.createElement('p');
     rain.classList.add('value');
     rain.textContent = precipValue + precipUnit;
 
     const windInfo = document.createElement('div');
     windInfo.classList.add('info');
-    windInfo.textContent = 'Wind: ';
+    windInfo.textContent = 'Wind';
     const wind = document.createElement('p');
     wind.classList.add('value');
     wind.textContent=  windValue + windUnit + ' ' + object.wind_dir;
@@ -134,21 +134,21 @@ async function displayForecast () {
 
         const maxLineInfo = document.createElement('div');
         maxLineInfo.classList.add('info');
-        maxLineInfo.textContent = 'Max: ';
+        maxLineInfo.textContent = 'Max';
         const maxLine = document.createElement('p');
         maxLine.classList.add('smallValue');
         maxLine.textContent =  maxValue + tempUnit;
 
         const minLineInfo = document.createElement('div');
         minLineInfo.classList.add('info');
-        minLineInfo.textContent = 'Min: ';
+        minLineInfo.textContent = 'Min';
         const minLine = document.createElement('p');
         minLine.classList.add('smallValue')
         minLine.textContent = minValue + tempUnit;
 
         const precipLineInfo = document.createElement('div');
         precipLineInfo.classList.add('info');
-        precipLineInfo.textContent = 'Rain: '; 
+        precipLineInfo.textContent = 'Rain'; 
         const precipLine = document.createElement('p');
         precipLine.classList.add('smallValue');
         precipLine.textContent =  preCastValue + precipUnit;
